@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "babel --extensions '.ts' src --out-dir dist",
-    "start": "npx ts-node src/index.ts",
+    "start": "npx dist/index.js",
     "dev": "npx nodemon src/index.ts"
   },
   "dependencies": {
