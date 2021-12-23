@@ -1,0 +1,23 @@
+type Query {
+  # User queries
+  getMe: User!
+  signIn(payload: SignIn!): AuthData!
+
+  # Wallet queries
+  getWallets: [Wallet]!
+  getWallet(walletId: ID!): Wallet!
+}
+
+type Mutation {
+  # User mutations
+  signUp(payload: SignUp!): AuthData!
+  editUser(payload: EditUser!): User!
+
+  # Wallet mutations
+  createWallet(payload: WalletData!): [Wallet]!
+  deleteWallet(walletId: ID!): [Wallet]!
+
+  # Record mutations
+  createRecord(payload: RecordData!, walletId: ID!): Wallet!
+  deleteRecord(recordId: ID!, walletId: ID!): Wallet!
+}

@@ -1,0 +1,29 @@
+# User types
+type User {
+  _id: ID
+  username: String
+  email: String
+  wallets: [ID]!
+}
+
+type AuthData {
+  _id: ID!
+  token: String!
+  tokenExpiration: Int!
+}
+
+# User inputs
+input SignUp {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input SignIn {
+  email: String!
+  password: String!
+}
+
+input EditUser {
+  username: String!
+}

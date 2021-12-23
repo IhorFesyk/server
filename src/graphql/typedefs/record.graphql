@@ -1,0 +1,19 @@
+# Record types
+type Record {
+  _id: ID!
+  type: String!
+  amount: Int!
+  category: String!
+  description: String!
+
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+# Record inputs
+input RecordData {
+  type: String!
+  amount: Int!
+  category: String!
+  description: String!
+}

@@ -1,0 +1,22 @@
+# Wallet types
+type Wallet {
+  _id: ID!
+  title: String!
+  amount: Int!
+  records: [Record]!
+  monthRecords: [Record]!
+
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+type ShortWallet {
+  _id: ID!
+  title: String!
+  records: [ID]!
+}
+
+# Wallet inputs
+input WalletData {
+  title: String!
+}
