@@ -1,9 +1,7 @@
 import { Schema, model, SchemaDefinitionProperty } from "mongoose"
 
-type TRecordType = "income" | "spending"
-
 export interface IRecord {
-  type: SchemaDefinitionProperty<TRecordType>
+  type: SchemaDefinitionProperty<String>
   amount: SchemaDefinitionProperty<Number>
   category: SchemaDefinitionProperty<String>
   description: SchemaDefinitionProperty<String>

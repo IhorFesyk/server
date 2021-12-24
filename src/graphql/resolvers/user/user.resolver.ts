@@ -49,8 +49,7 @@ export class UserResolver {
         if (!user) {
           throw new UserInputError("Error", {
             errors: {
-              email: "Email or password is incorrect",
-              password: "Email or password is incorrect"
+              email: "Email or password is incorrect!"
             }
           })
         }
@@ -60,8 +59,7 @@ export class UserResolver {
         if (!isPasswordCorrect) {
           throw new UserInputError("Error", {
             errors: {
-              email: "Email or password is incorrect",
-              password: "Email or password is incorrect"
+              email: "Email or password is incorrect!"
             }
           })
         }
@@ -88,13 +86,6 @@ export class UserResolver {
       async signUp(_, { payload }: ISignUpPayload) {
         const { username, email, password } = payload
 
-        // Validation inputs data
-        const { errors, valid } = closureContext.validator.validateSignUpInput(username, email, password)
-        if (!valid) {
-          throw new UserInputError("Errors", { errors })
-        }
-
-        // Check if User with typed email already exist
         const isExistingUser = await User.findOne({ email })
         if (isExistingUser) {
           throw new UserInputError("Errors", {

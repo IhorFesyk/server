@@ -31,8 +31,12 @@ export class RecordResolver {
 
         // Validate data inputs
         const { type, amount, category, description } = payload
-        const valid = true
+        const { errors, valid } = closureContext.validator.validateNewRecordInput(type, amount, category, description)
 
+        if (!valid) {
+          throw new UserInputError("Errors", { errors })
+        }
+        
         const normalizedAmount = type === "spending" && amount > 0 ? -amount : amount
 
         if (!valid) {

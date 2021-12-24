@@ -1,4 +1,11 @@
-import { IErrorsValidation, TValidateLoginInput, TValidateSignUpInput, TValidateEditUserInput } from "./types"
+import {
+  IErrorsValidation,
+  TValidateLoginInput,
+  TValidateSignUpInput,
+  TValidateEditUserInput,
+  TValidateNewWalletInput,
+  TValidateNewRecordInput
+} from "./types"
 
 export class Validator {
   validateSignUpInput: TValidateSignUpInput = (username, email, password) => {
@@ -58,6 +65,40 @@ export class Validator {
 
     if (username.trim() === "") {
       errors.username = "Username must not be empty"
+    }
+
+    return {
+      errors,
+      valid: Object.keys(errors).length < 1
+    }
+  }
+
+  validateNewWalletInput: TValidateNewWalletInput = title => {
+    const errors: IErrorsValidation = {}
+
+    if (title.trim() === "") {
+      errors.title = "Title must not be empty"
+    }
+
+    return {
+      errors,
+      valid: Object.keys(errors).length < 1
+    }
+  }
+
+  validateNewRecordInput: TValidateNewRecordInput = (type, amount, category, description) => {
+    const errors: IErrorsValidation = {}
+
+    if (amount > 0) {
+      errors.title = "Category must not be empty"
+    }
+
+    if (category.trim() === "") {
+      errors.title = "Category must not be empty"
+    }
+
+    if (description.trim() === "") {
+      errors.title = "Description must not be empty"
     }
 
     return {

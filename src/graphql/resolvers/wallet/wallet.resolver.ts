@@ -5,12 +5,16 @@ import { Helpers } from "../../../utils/Helpers"
 import { ICreateWalletPayload, IGetWalletPayload } from "./wallet.types"
 import { IUserAuthData } from "../../../utils/types"
 import moment from "moment"
+import { UserInputError } from "apollo-server"
+import { Validator } from "../../../utils/Validator"
 
 export class WalletResolver {
   helpers: Helpers
+  validator: Validator
 
   constructor() {
     this.helpers = new Helpers()
+    this.validator = new Validator()
   }
 
   queries() {
@@ -122,6 +126,10 @@ export class WalletResolver {
 
         // Validate data inputs
         const { title } = payload
+        const { errors, valid } = closureContext.validator.validateNewWalletInput(title)
+        if (!valid) {
+          throw new UserInputError("Errors", { errors })
+        }
 
         // Create and save new wallet
         const newWallet = new Wallet({ title, records: [] })
@@ -180,9 +188,8 @@ export class WalletResolver {
 
         // Return all wallets with add data
         return userWalletsWithRecords
-        
       },
-      
+
       async deleteWallet(_, { walletId }: any, context) {
         // Check is access token provided
         const currentUser: IUserAuthData = closureContext.helpers.checkAuth(context)
